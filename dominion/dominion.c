@@ -1105,89 +1105,24 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 		
     case cutpurse:
 
-      updateCoins(currentPlayer, state, 2);
-      for (i = 0; i < state->numPlayers; i++)
-	{
-	  if (i != currentPlayer)
-	    {
-	      for (j = 0; j < state->handCount[i]; j++)
-		{
-		  if (state->hand[i][j] == copper)
-		    {
-		      discardCard(j, i, state, 0);
-		      break;
-		    }
-		  if (j == state->handCount[i])
-		    {
-		      for (k = 0; k < state->handCount[i]; k++)
-			{
-			  if (DEBUG)
-			    printf("Player %d reveals card number %d\n", i, state->hand[i][k]);
-			}	
-		      break;
-		    }		
-		}
-					
-	    }
-				
-	}				
-
-      //discard played card from hand
-      discardCard(handPos, currentPlayer, state, 0);			
-
-      return 0;
+      return cutPurseFunc(currentPlayer, state, handPos);
 
 		
     case embargo: 
-      //+2 Coins
-      state->coins = state->coins + 2;
-			
-      //see if selected pile is in play
-      if ( state->supplyCount[choice1] == -1 )
-	{
-	  return -1;
-	}
-			
-      //add embargo token to selected supply pile
-      state->embargoTokens[choice1]++;
-			
-      //trash card
-      discardCard(handPos, currentPlayer, state, 1);		
-      return 0;
+  	
+      return embargoFunc(state, handPos, currentPlayer, choice1);
 		
     case outpost:
-      //set outpost flag
-      state->outpostPlayed++;
-			
-      //discard card
-      discardCard(handPos, currentPlayer, state, 0);
-      return 0;
+      
+      return outpostFunc(state, handPos, currentPlayer);
 		
     case salvager:
-      //+1 buy
-      state->numBuys++;
-			
-      if (choice1)
-	{
-	  //gain coins equal to trashed card
-	  state->coins = state->coins + getCost( handCard(choice1, state) );
-	  //trash card
-	  discardCard(choice1, currentPlayer, state, 1);	
-	}
-			
-      //discard card
-      discardCard(handPos, currentPlayer, state, 0);
-      return 0;
+
+      return salvagerFunc(state, choice1, handPos, currentPlayer);
 		
     case sea_hag:
-      for (i = 0; i < state->numPlayers; i++){
-	if (i != currentPlayer){
-	  state->discard[i][state->discardCount[i]] = state->deck[i][state->deckCount[i]--];			    state->deckCount[i]--;
-	  state->discardCount[i]++;
-	  state->deck[i][state->deckCount[i]--] = curse;//Top card now a curse
-	}
-      }
-      return 0;
+
+      return seaHagFunc(state, currentPlayer);
 		
     case treasure_map:
       //search hand for another treasure_map
@@ -1327,6 +1262,93 @@ int updateCoins(int player, struct gameState *state, int bonus)
 
   return 0;
 }
+
+/*===============Refactored Cards====================*/
+
+int cutPurseFunc (int currentPlayer, struct gameState *state, int handPos) {
+  int i, j, k;
+  
+  updateCoins(currentPlayer, state, 1);
+  for (i = 0; i < state->numPlayers; i++) {
+    if (i != currentPlayer) {
+      for (j = 0; j < state->handCount[i]; j++) {
+        if (state->hand[i][j] == copper) {
+          discardCard(j, i, state, 0);
+          break;
+        }
+        if (j == state->handCount[i]) {
+          for (k = 0; k < state->handCount[i]; k++) {
+            if (DEBUG)
+              printf("Player %d reveals card number %d\n", i, state->hand[i][k]);
+          } 
+          break;
+        }   
+      }
+          
+    }
+  }       
+
+  //discard played card from hand
+  discardCard(handPos, currentPlayer, state, 0);      
+
+  return 0;
+}
+
+int embargoFunc (struct gameState *state, int handPos, int currentPlayer, int choice1) {
+  //+2 Coins
+  state->coins = state->coins + 1;
+      
+  //see if selected pile is in play
+  if ( state->supplyCount[choice1] == -1 ) {
+    return -1;
+  }
+      
+  //add embargo token to selected supply pile
+  state->embargoTokens[choice1]++;
+      
+  //trash card
+  discardCard(handPos, currentPlayer, state, 1);    
+  return 0;
+}
+
+int outpostFunc (struct gameState *state, int handPos, int currentPlayer) {
+  //set outpost flag
+  state->outpostPlayed++;
+      
+  //discard card
+  discardCard(handPos, currentPlayer, state, 1);
+  return 0;
+}
+
+int salvagerFunc (struct gameState *state, int choice1, int handPos, int currentPlayer) {
+  //+1 buy
+  state->numBuys++;
+      
+  if (choice1) {
+    //gain coins equal to trashed card
+    state->coins = state->coins + getCost( handCard(choice1, state) );
+    //trash card
+    discardCard(choice1, currentPlayer, state, 0);  
+  }
+      
+  //discard card
+  discardCard(handPos, currentPlayer, state, 1);
+  return 0;
+}
+
+int seaHagFunc (struct gameState *state, int currentPlayer) {
+  int i;
+
+  for (i = 0; i < state->numPlayers; i++){
+    if (i != currentPlayer){
+      state->discard[i][state->discardCount[i]] = state->deck[i][state->deckCount[i]--];          state->deckCount[i]--;
+      state->discardCount[i]++;
+      state->deck[i][state->deckCount[i]--] = curse;//Top card now a curse
+    }
+  }
+  return 0;
+}
+
 
 
 //end of dominion.c
