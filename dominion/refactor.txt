@@ -1,0 +1,3 @@
+Cards refactored: cutpurse, embargo, outpost, salvager, sea hag.
+
+To refactor these card effects into their own functions I first took note of what variables and parameters from cardEffect they used. Then I copied the code inside their part of the switch statement into a separate function. For each function I used the notes I made about what information they used to determine the parameters and the local variables. Once I had a function I put its signature in dominion.h. After this I made sure that the code still compiled and repeated the process for each of the cards. 
