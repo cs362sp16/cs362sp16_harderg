@@ -22,21 +22,23 @@ int main() {
 
 	struct gameState g;
 
-  	int k[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,
-	       outpost,baron,tribute};
+  int k[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,
+	             outpost,baron,tribute};
 
-  	int r = initializeGame(2, k, 5, &g);
+  int r = initializeGame(2, k, 5, &g);
 
-  	myassert(r == 0, "Proper set up for a game, this should succeed");
+  printf("IN UNITTEST1\n");
 
-  	int k2[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,
-	       outpost,baron,adventurer};
+  myassert(r == 0, "Proper set up for a game, this should succeed");
 
-  	r = initializeGame(2, k2, 5, &g);
+  int k2[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,
+	               outpost,baron,adventurer};
 
-  	myassert(r == -1,"Duplicated cards, this should fail");
+  r = initializeGame(2, k2, 5, &g);
 
-  	checkasserts();
+  myassert(r == -1,"Duplicated cards, this should fail");
 
-  	return 0;
+  checkasserts();
+
+  return 0;
 }

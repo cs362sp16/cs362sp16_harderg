@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "dominion.h"
+#include "dominion_helpers.h"
 
 
 int failed = 0;
@@ -22,19 +23,17 @@ void checkasserts() {
 int main() {
 
   struct gameState g;
+  int j = 0;
 
   int k[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador, outpost,baron,tribute};
 
   int r = initializeGame(2, k, 5, &g);
 
-  printf("IN UNITTEST4\n");
+  printf("IN CARDTEST1\n");
 
-  myassert(r == 0, "No duplicates, 2 players, should succeed");
+  r = cardEffect(smithy, 1, 1, 1, &g, 0, &j);
 
-  //should return 5, each player starts with five cards
-  r = numHandCards(&g);
-
-  myassert(r == 5, "Player was not dealt five cards to start");
+  myassert(r == 0, "Smithy failed");
 
   checkasserts();
 

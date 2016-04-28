@@ -27,9 +27,11 @@ int main() {
 
   int r = initializeGame(2, k, 5, &g);
 
+  printf("IN UNITTEST2\n");
+
   myassert(r == 0, "No duplicates, 2 players, should succeed");
 
-  r = playCard(1,0,0,0,&g);
+  r = playCard(baron,1,0,0,&g);
 
   myassert(r == 0, "playCard failed");
 

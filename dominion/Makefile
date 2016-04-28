@@ -23,10 +23,18 @@ unittestresults.out: unittest1.c dominion.o rngs.o
 	gcc -o unittest2 unittest2.c dominion.o rngs.o $(CFLAGS)
 	gcc -o unittest3 unittest3.c dominion.o rngs.o $(CFLAGS)
 	gcc -o unittest4 unittest4.c dominion.o rngs.o $(CFLAGS)
-	./unittest1 &>> unittestresults.out
+	gcc -o cardtest1 cardtest1.c dominion.o rngs.o $(CFLAGS)
+	gcc -o cardtest2 cardtest2.c dominion.o rngs.o $(CFLAGS)
+	gcc -o cardtest3 cardtest3.c dominion.o rngs.o $(CFLAGS)
+	gcc -o cardtest4 cardtest4.c dominion.o rngs.o $(CFLAGS)
+	./unittest1 >> unittestresults.out
 	./unittest2 >> unittestresults.out
 	./unittest3 >> unittestresults.out
 	./unittest4 >> unittestresults.out
+	./cardtest1 >> unittestresults.out
+	./cardtest2 >> unittestresults.out
+	./cardtest3 >> unittestresults.out
+	./cardtest4 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 	cat dominion.c.gcov >> unittestresults.out
 

@@ -1,0 +1,1 @@
+I think that I may have encountered a bug in the playCard() function. My unit test on it fails because the condition ( card < adventurer || card > treasure_map ) evaluates to true despite my having tried several configurations to get it to evaluate to false. I am not sure what the exact issue is at this time.

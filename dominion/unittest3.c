@@ -27,6 +27,8 @@ int main() {
 
   int r = initializeGame(2, k, 5, &g);
 
+  printf("IN UNITTEST3\n");
+
   myassert(r == 0, "No duplicates, 2 players, should succeed");
 
   r = buyCard(0, &g);
