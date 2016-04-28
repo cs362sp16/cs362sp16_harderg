@@ -1,4 +1,7 @@
 Code coverage results and implications:
-
+My eight tests covered 32.80% of the 558 lines in dominion.c. While not very high, I did cover some of the core functionality of the game. Granted, we could be more confident that the code was functional with a higher percentage say, 80-90%.
 
 Testing efforts:
+For my four unit tests I decided to use custom assert functions so that in case a test failed the code would continue to run and I could see coverage results. To do this I used to functions, one to assert, and one to determine if an assert occured. If no asserts occured the second function would print out a success message. If an assert did occur then the function that asserts would print that their was a failure and an accompanying message. 
+
+For the unit tests I decide to test initializeGame(), playCard(), buyCard(), and numHandCards(). I ran into what may be a bug in playCard() that I documented in unittestbugs.txt. Other than this apparent bug, I found that the functions I tested operate as expected. The cards I tested were smithy, sea hag, tribute, and cutpurse. This amounted to two cards (smithy and tribute) that don't have their own functions, and two (sea hag and cutpurse) that do. I found that these cards also do not encounter errors when running.  
