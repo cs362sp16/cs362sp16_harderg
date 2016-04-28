@@ -18,7 +18,7 @@ void checkasserts() {
   }
 }
 
-//Tests playCard
+//Tests buyCard
 int main() {
 
   struct gameState g;
@@ -29,9 +29,10 @@ int main() {
 
   myassert(r == 0, "No duplicates, 2 players, should succeed");
 
-  r = playCard(1,0,0,0,&g);
+  //should return 5, each player starts with five cards
+  r = numHandCards(&g);
 
-  myassert(r == 0, "playCard failed");
+  myassert(r == 5, "Player was not dealt five cards to start");
 
   checkasserts();
 

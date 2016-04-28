@@ -27,18 +27,14 @@ int main() {
 
   	int r = initializeGame(2, k, 5, &g);
 
-  	myassert(r == 0, "No duplicates, 2 players, should succeed");
+  	myassert(r == 0, "Proper set up for a game, this should succeed");
 
   	int k2[10] = {smithy,adventurer,gardens,embargo,cutpurse,mine,ambassador,
 	       outpost,baron,adventurer};
 
   	r = initializeGame(2, k2, 5, &g);
 
-  	myassert(r == -1,"Duplicate card in setup, should fail");
-
-  	r = initializeGame(200, k, 5, &g);
-
-  	//myassert(r == 0,"I should be allowed to play with a lot of people!");
+  	myassert(r == -1,"Duplicated cards, this should fail");
 
   	checkasserts();
 

@@ -21,12 +21,16 @@ unittest1:
 unittestresults.out: unittest1.c dominion.o rngs.o
 	gcc -o unittest1 unittest1.c dominion.o rngs.o $(CFLAGS)
 	gcc -o unittest2 unittest2.c dominion.o rngs.o $(CFLAGS)
+	gcc -o unittest3 unittest3.c dominion.o rngs.o $(CFLAGS)
+	gcc -o unittest4 unittest4.c dominion.o rngs.o $(CFLAGS)
 	./unittest1 &>> unittestresults.out
 	./unittest2 >> unittestresults.out
+	./unittest3 >> unittestresults.out
+	./unittest4 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 	cat dominion.c.gcov >> unittestresults.out
 
 all: playdom player
 
 clean:
-	rm -f *.o playdom.exe playdom test.exe test player unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4 player.exe testInit testInit.exe *.gcov *.gcda *.gcno *.so *.a *.dSYM
+	rm -f *.o playdom.exe playdom test.exe test player unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4 unittestresults.out player.exe testInit testInit.exe *.gcov *.gcda *.gcno *.so *.a *.dSYM
