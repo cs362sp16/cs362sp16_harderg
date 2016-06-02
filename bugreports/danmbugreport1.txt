@@ -1,0 +1,13 @@
+Bug Report 1
+
+Bug: remodelCardEffect() if statement logic
+
+This bug is an issue with remodelCardEffect() where the logic in the if statement is incorrect. 
+
+The Dominion wiki states that the effect of remodel is: "Trash a card from your hand. Gain a card costing up to 2 Coins more than the trashed card." However, the if statement in card effect has the <= operator instead of the greater than operator.
+
+Severity: High
+This bug renders the remodel card effectively broken, as it does not do its stated effect. Any time a game is created with the remodel card, the end result will not work.
+
+Priority: High
+This bug requires a simple fix. I estimate that the time it will take to fux this bug is less than five minutes. Because of the high severity and low cost to fix this big its priority to be fixed is high.

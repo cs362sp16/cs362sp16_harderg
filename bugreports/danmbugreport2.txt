@@ -1,0 +1,11 @@
+Bug Report 2
+
+Bug: Infinite loop when running testdominion.c
+
+My full game random tester, when run against this version of dominion, never finishes. Run against other versions of the dominion code base the random game player executes and produces useful output. It never finishes with this codebase.
+
+Severity: Moderate
+This is not a fatal flaw in the dominion code. It demonstrates that there are significant differences somewhere in this code than in other versions, but it is not trivial to find where these exist. This code passes other unit tests, so the issue is likely not as severe as it seems on first running the tester.
+
+Priority: Low
+This bug will take a relatively high number of hours to track down and fix. As stated above this code passes other unit tests, but only fails on this random player. Because we know the code works nearly as well as some other implementations, this bug is a low priority at this time. 

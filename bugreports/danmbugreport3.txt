@@ -1,0 +1,14 @@
+Bug Report 3
+
+Bug: playCard() failure on unit tests
+
+This bug occurs in play card one of the conditionals. 
+The following:     
+( card < adventurer || card > treasure_map ) 
+always evaluates to true. Despite several different runs with various configurations for the unit test, this conditional always evaluates true. Even concerted efforsts for it to fail do not work.
+
+Severity: Moderate
+Two different testers, playdom.c and testdominion.c still work correctly despite this bug. However, playCard() should not be continually returning -1, it needs to be returning 0. As such, this bug may cause future problems in playable implementations of this game.
+
+Priority: Moderate
+This bug requires further investigation. Because the place it occurs in has been identified by the tester, and the problem is very specific it should not take an inordinate amount of time to investigate and fix. In addition, we would like to see all the unit tests passing, therefore the priority of this bug is moderate.
