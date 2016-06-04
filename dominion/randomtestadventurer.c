@@ -35,7 +35,7 @@ int main(int argc, char const *argv[])
 
   x = (int)argv[1];
   srand(x);
-  printf("IN RANDOMCARDTESTf\n");
+  printf("IN RANDOMCARDTEST\n");
 
   for (i = 0; i < 2000; i++) {  
     r = initializeGame((rand() % MAX_PLAYERS), k, rand(), &g);
